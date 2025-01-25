@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Information</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        td {
+            padding: 10px;
+            border: 1px solid black;
+            text-align: left;
+        }
+        th {
+            text-align: center;
+            background-color: #bfe5a2;
+            padding: 10px;
+            border: 1px solid black;
+        }
+        tr:hover {
+            background-color: blue;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <table>
+        <thead>
+            <tr>
+                <th colspan="2">Student Information</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Student ID</td>
+                <td id="id"></td>
+            </tr>
+            <tr>
+                <td>Full Name</td>
+                <td id="name"></td>
+            </tr>
+            <tr>
+                <td>Date of Birth</td>
+                <td id="birthday"></td>
+            </tr>
+            <tr>
+                <td>Gender</td>
+                <td id="gender"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        var xmlString = `
+            <student>
+                <id>987456</id>
+                <name>Marie Curie</name>
+                <birthday>7/11/1867</birthday>
+                <gender>Woman</gender>
+            </student>
+        `;
+
+        function loadInformation() {
+            var parser = new DOMParser();
+            var xmlDoc = parser.parseFromString(xmlString, "text/xml");
+
+            var studentId = xmlDoc.getElementsByTagName("id")[0].childNodes[0].nodeValue;
+            var studentName = xmlDoc.getElementsByTagName("name")[0].childNodes[0].nodeValue;
+            var studentBirthday = xmlDoc.getElementsByTagName("birthday")[0].childNodes[0].nodeValue;
+            var studentGender = xmlDoc.getElementsByTagName("gender")[0].childNodes[0].nodeValue;
+
+            document.getElementById("id").innerText = studentId;
+            document.getElementById("name").innerText = studentName;
+            document.getElementById("birthday").innerText = studentBirthday;
+            document.getElementById("gender").innerText = studentGender;
+        }
+
+        loadInformation();
+    </script>
+</body>
+</html>
